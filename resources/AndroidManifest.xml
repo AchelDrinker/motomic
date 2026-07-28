@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    android:versionCode="9"
+    android:versionName="9.0"
+    android:installLocation="internalOnly"
+    android:compileSdkVersion="36"
+    android:compileSdkVersionCodename="16"
+    package="com.tillekesoft.aamotomic"
+    platformBuildVersionCode="36"
+    platformBuildVersionName="16">
+    <uses-sdk
+        android:minSdkVersion="24"
+        android:targetSdkVersion="35"/>
+    <supports-screens
+        android:anyDensity="true"
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"/>
+    <uses-feature
+        android:name="android.hardware.bluetooth"
+        android:required="true"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <application
+        android:theme="@style/LightTheme"
+        android:label="AAMotoMic"
+        android:icon="@mipmap/ic_launcher"
+        android:name="androidx.multidex.MultiDexApplication"
+        android:roundIcon="@mipmap/ic_launcher_round">
+        <activity
+            android:label="AAMotoMic"
+            android:name="com.tillekesoft.aamotomic.main"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <service
+            android:name="com.tillekesoft.aamotomic.starter"
+            android:exported="true"/>
+        <receiver
+            android:name="com.tillekesoft.aamotomic.starter.starter_BR"
+            android:exported="true"/>
+        <service
+            android:name="com.tillekesoft.aamotomic.audioservice"
+            android:exported="true"
+            android:foregroundServiceType="connectedDevice"/>
+        <receiver
+            android:name="com.tillekesoft.aamotomic.audioservice.audioservice_BR"
+            android:exported="true"/>
+        <receiver
+            android:name="com.tillekesoft.aamotomic.btreceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="android.bluetooth.device.action.ACL_CONNECTED"/>
+                <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <activity
+            android:label="AAMotoMic"
+            android:name="com.tillekesoft.aamotomic.diaglog"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:label="AAMotoMic"
+            android:name="com.tillekesoft.aamotomic.readmeviewer"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+    </application>
+</manifest>
